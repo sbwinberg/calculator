@@ -25,7 +25,10 @@ function operate(a, b, o) {
         return multiply(a,b);
     }
     else if(o === "/") {
-        return divide(a,b);
+        if(b === 0){
+            return "Nice try you son of a gun";
+        }
+        else return divide(a,b);
     }
 }
 
