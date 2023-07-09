@@ -85,10 +85,47 @@ CE.addEventListener("click", function() {
     displayOperator = "";
 })
 
-var val1;
-var val2;
+//Add equals button
+//Extract numbers and operators
+const equals = document.getElementById("=");
+equals.addEventListener("click", function() {
+    const text = screen.innerText;
+    n = text.split(/[^0-9\.]+/);
+    op = text.split(/[0-9]+/).filter((i) => i !== "");
 
-if(displayOperator !== ""){
-    val1 = displayValue;
-    
-}
+    //convert numbers array to numbers
+    n = n.map(function(x) {
+        return parseInt(x);
+    });
+
+
+    //turning the secondly used number in the array to the result
+    //since the next calculation will be based on that number
+    var sum = 0;
+    for(var i  = 0; i < op.length; i++){
+        n[i+1] = operate(n[i], n[i+1], op[i]);
+        // sum += operate(n[i], n[i+1], op[i]);
+        // if(op[i] === "*") {
+        //     n[i+1] = multiply(n[i], n[i+1]);
+        //     console.log(n);
+        // }  
+        // else if(op[i] === "/") {
+        //     n[i+1] = divide(n[i], n[i+1]);
+        //     console.log(n);
+        // }      
+        // else if(op[i] === "+"){
+        //     n[i+1] = add(n[i], n[i+1]);
+        //     console.log(n);
+        // }
+        // else if(op[i] === "-") {
+        //     n[i+1] = subtract(n[i], n[i+1]);
+        //     console.log(n);
+        // }
+    };
+    sum = n[n.length-1];
+    // console.log(n[n.length-1]);
+    screen.innerHTML += "<br />" + "=" + sum;
+    console.log(sum);
+
+
+});
